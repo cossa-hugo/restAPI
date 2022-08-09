@@ -1,19 +1,10 @@
 package com.example.sfeir.restreactive.restAPI.model;
 
-import jdk.jfr.DataAmount;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 
-@Data
-@Builder
-@AllArgsConstructor
-@Document
-@ToString
+@Document(collation = "books")
 public class Book {
 
     @Id
@@ -21,6 +12,15 @@ public class Book {
     private String title;
     private String author;
     private int price;
+    private boolean isPublished;
+
+    public Book(){}
+    public Book(String title, String author, int price, boolean isPublished){
+        this.title = title;
+        this.author = author;
+        this.price = price;
+        this.isPublished = isPublished;
+    }
 
     public String getId() {
         return id;
@@ -52,5 +52,13 @@ public class Book {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public boolean isPublished(){
+        return isPublished;
+    }
+
+    public void setPublished(boolean published){
+        this.isPublished = published;
     }
 }

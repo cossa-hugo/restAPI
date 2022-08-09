@@ -1,10 +1,16 @@
 package com.example.sfeir.restreactive.restAPI.repository;
 
-import com.example.sfeir.restreactive.restAPI.model.Book;
+import com.example.sfeir.restreactive.restAPI.document.Book;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.Tailable;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-@Repository
 public interface BookRepository extends ReactiveMongoRepository<Book, String> {
 
+    @Tailable
+    Flux<Book> findAllBy();
+    @Tailable
+    Flux<Book> findWithTailableCursorBy();
+    Flux<Book> findAllByAuthor(String author);
 }
